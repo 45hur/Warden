@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+
+  <?define MajorVersion="1" ?>
+  <?define MinorVersion="0" ?>
+  <?define BuildVersion="0" ?>
+  <?define Revision="0" ?>
+  <?define VersionNumber="$(var.MajorVersion).$(var.MinorVersion).$(var.BuildVersion).$(var.Revision)" ?>
+  <?define UpgradeCode="{13F7EA46-CC08-4F36-84C3-B2947DA85CE2}" ?>
+  <?define UpgradeId="{740E7F4E-6A37-43A6-8FAF-0BA19D9EFC2E}" ?>
+  <?define ProductCode="*" ?>
+  <?define ShortcutId="{ED93D738-7D87-4DD3-A54D-6337D286B4D8}" ?>
+  <?define ProductName="Whalebone Warden" ?>
+  <?define buildbinfolder="$(sys.SOURCEFILEDIR)\..\Warden\bin\$(var.Configuration)\net48\" ?>
+  
+</Include>

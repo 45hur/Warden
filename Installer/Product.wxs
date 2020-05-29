@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  
+  <?include $(sys.CURRENTDIR)GlobalVariables.wxi ?>
+
+  <Product Id="$(var.ProductCode)" Name="$(var.ProductName)" Language="1033" Version="$(var.VersionNumber)" Manufacturer="Whalebone" UpgradeCode="$(var.UpgradeCode)">
+		<Package InstallerVersion="200" Compressed="yes" InstallPrivileges="elevated" AdminImage="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="Warden" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Whalebone">
+          <Directory Id="WardenFolder" Name="Warden" />
+        </Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<Component Id="ProductComponent"> 
+				<File 
+          Id="WhaleboneWarden" 
+          Name="Whalebone.Warden.exe" 
+          DiskId="1"
+          Source="$(var.buildbinfolder)\Whalebone.Warden.exe" 
+          Vital="yes" 
+          KeyPath="yes" />
+				
+				<ServiceInstall Id="ServiceInstaller" 
+                        Type="ownProcess"
+                        Vital="yes"
+						            Name="WhaleboneWarden" 
+                        DisplayName="Whalebone Warden"
+						            Description="Secures DNS Traffic" 
+                        Start="auto"
+						            Account="LocalSystem" 
+                        ErrorControl="normal"
+                        Arguments=" /start WhaleboneWarden" 
+                        Interactive="no" />
+        
+				<ServiceControl Id="StartService" Stop="both" Start="install" Remove="uninstall" Name="WhaleboneWarden" Wait="yes" />
+
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>
