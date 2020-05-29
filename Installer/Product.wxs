@@ -17,8 +17,8 @@
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
-        <Directory Id="INSTALLFOLDER" Name="Whalebone">
-          <Directory Id="WardenFolder" Name="Warden" />
+        <Directory Id="Whalebone" Name="Whalebone">
+          <Directory Id="INSTALLFOLDER" Name="Warden" />
         </Directory>
 			</Directory>
 		</Directory>
